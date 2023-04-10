@@ -4,10 +4,10 @@ from words import easy_words, medium_words, hard_words
 
 class GetWord:
 
-    def __init__(self, easy_w: list, medium_w: list, hard_w: list, difficulty: str):
-        self.easy_w = easy_w
-        self.medium_w = medium_w
-        self.hard_w = hard_w
+    def __init__(self, difficulty: str):
+        self.easy_w = easy_words
+        self.medium_w = medium_words
+        self.hard_w = hard_words
         self.difficulty = difficulty
 
     def choose_word(self):
@@ -24,7 +24,3 @@ class GetWord:
             decrypted_word += chr(ord(letter) + 3)
 
         return decrypted_word
-
-
-some = GetWord(easy_words, medium_words, hard_words, "hard")
-print(some.choose_word())
