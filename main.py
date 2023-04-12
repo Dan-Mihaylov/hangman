@@ -44,19 +44,19 @@ def main_menu():
     # where difficulty will be chosen.
     def get_name():
         global current_user, options_frame
-
-        username = user_entry.get()
-        current_user = username
+        if not current_user:
+            username = user_entry.get()
+            current_user = username
 
         options_frame.destroy()
 
         options_frame = LabelFrame(game_frame)
         options_frame.pack(pady=20)
         name = Label(options_frame, text=current_user, font="Helvetica, 24 bold")
-        name.grid(row=0, column=0, padx=10, pady=10)
+        name.grid(row=0, column=0, padx=10)
 
         options = Label(options_frame, text="Select Difficulty:", font="Helvetica, 24")
-        options.grid(row=1, column=0)
+        options.grid(row=1, column=0, pady=10)
 
         easy_btn = Button(options_frame, text="Easy Words", font="Helvetica, 20", width=30,
                           command=lambda: start_game("easy"))
