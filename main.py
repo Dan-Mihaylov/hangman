@@ -8,7 +8,13 @@ root.title("Hangman")
 root.geometry("800x800+600+150")
 root.resizable(False, False)
 root.iconbitmap("images/logo.ico")
+my_menu = Menu(root)
+root.configure(menu=my_menu)
 
+# Creating drop_down menu items
+file_menu = Menu(my_menu)
+my_menu.add_cascade(label="Game", menu=file_menu)
+file_menu.add_command(label="Get Score")
 
 current_user = str()
 difficulty = str()
