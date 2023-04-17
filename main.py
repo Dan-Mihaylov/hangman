@@ -7,6 +7,8 @@ root = Tk()
 root.title("Hangman")
 root.geometry("800x800+600+150")
 root.resizable(False, False)
+root.iconbitmap("images/logo.ico")
+
 
 current_user = str()
 difficulty = str()
@@ -102,7 +104,7 @@ def main_menu():
     else:
         user_label = Label(options_frame, text="Enter Username:", font="Helvetica, 16", bg=bg_color, fg=fg_color)
         user_label.grid(row=0, column=0, padx=10)
-        user_entry = Entry(options_frame, font="Helvetica, 16", bg=abg_color, fg=fg_color)
+        user_entry = Entry(options_frame, font="Helvetica, 16", bg=abg_color, fg=fg_color, justify="center")
         user_entry.grid(row=0, column=1, padx=10)
         get_user_btn = Button(options_frame, text="Enter", font="Helvetica, 16", command=get_name, bg=bg_color,
                               fg=fg_color, activebackground=abg_color,activeforeground=afg_color)
@@ -114,8 +116,7 @@ def start_game(diff: str):
     global game_frame, current_word, hidden_word, letter, word, graphic_label, choices_frame, current_index, difficulty
     global used_letters_label
 
-    if not difficulty:
-        difficulty = diff
+    difficulty = diff
     current_index = 0
 
     # destroy the game frame and re-create it
