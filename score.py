@@ -19,9 +19,6 @@ def add_score(username: str, score: int):
     current.close()
 
 
-add_score("Maha", 10000)
-
-
 def check_score(username: str):
     pattern = r"points:(?P<pts>-*[0-9]+),(?P<res>[a-z]+)"
     try:
@@ -36,13 +33,13 @@ def check_score(username: str):
             current = open(f"temp/{username}.txt", "w")
             current.write("")
             current.close()
+            print("Your score reset")
             return "Your Score Has Reset"
+        print(total_score)
         return total_score
     except FileNotFoundError:
+        print("not a valid username")
         return "Not A Valid Username"
-
-
-print(check_score("Maha"))
 
 
 def get_points(len_hidden_word: int, missing_letter: int):
@@ -51,5 +48,3 @@ def get_points(len_hidden_word: int, missing_letter: int):
     else:
         return len_hidden_word * 10
 
-
-print(get_points(10, 2))

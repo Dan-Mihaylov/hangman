@@ -1,6 +1,9 @@
 from tkinter import *
+
+import score
 from create_image import CreateImage
 from get_word import GetWord
+from score import *
 
 
 root = Tk()
@@ -14,7 +17,8 @@ root.configure(menu=my_menu)
 # Creating drop_down menu items
 file_menu = Menu(my_menu)
 my_menu.add_cascade(label="Game", menu=file_menu)
-file_menu.add_command(label="Get Score")
+file_menu.add_command(label="Get User Score", command=lambda :check_score(username=current_user))
+
 
 current_user = str()
 difficulty = str()
