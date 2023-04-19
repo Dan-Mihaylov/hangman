@@ -19,6 +19,7 @@ def add_score(username: str, score: int):
     current.close()
 
 
+# Returns a string, so can be added to label and displayed in the game.
 def check_score(username: str):
     pattern = r"points:(?P<pts>-*[0-9]+),(?P<res>[a-z]+)"
     try:
@@ -42,6 +43,7 @@ def check_score(username: str):
         return "Not A Valid Username"
 
 
+# Returns the points to be addded to the text file with the current username
 def get_points(len_hidden_word: int, missing_letter: int):
     if missing_letter > 0:
         return missing_letter * -20

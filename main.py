@@ -1,9 +1,9 @@
 from tkinter import *
 
-import score
 from create_image import CreateImage
 from get_word import GetWord
 from score import *
+from create_menu import *
 
 
 root = Tk()
@@ -11,14 +11,6 @@ root.title("Hangman")
 root.geometry("800x800+600+150")
 root.resizable(False, False)
 root.iconbitmap("images/logo.ico")
-my_menu = Menu(root)
-root.configure(menu=my_menu)
-
-# Creating drop_down menu items
-file_menu = Menu(my_menu)
-my_menu.add_cascade(label="Game", menu=file_menu)
-file_menu.add_command(label="Get User Score", command=lambda :check_score(username=current_user))
-
 
 current_user = str()
 difficulty = str()
@@ -35,8 +27,10 @@ fg_color = "#cccccc"
 abg_color = "#258e74"
 afg_color = "white"
 
-# Creating the game frame, where all will be stored
+game_menu = DisplayMenu(root)
+game_menu.display_menu()
 
+# Creating the game frame, where all will be stored
 game_frame = LabelFrame(root, height=800, width=800, bg=bg_color)
 options_frame = LabelFrame(game_frame, bg=bg_color)
 
@@ -63,10 +57,11 @@ def main_menu():
     # creating a function here to get the username of the player and display the second options window,
     # where difficulty will be chosen.
     def get_name():
-        global current_user, options_frame
+        global current_user, options_frame, game_menu
         if not current_user:
             username = user_entry.get()
             current_user = username
+            game_menu.update_user(current_user)
 
         options_frame.destroy()
 
