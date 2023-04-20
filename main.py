@@ -26,9 +26,8 @@ bg_color = "#1f7a63"
 fg_color = "#cccccc"
 abg_color = "#258e74"
 afg_color = "white"
+change_user = False
 
-game_menu = DisplayMenu(root)
-game_menu.display_menu()
 
 # Creating the game frame, where all will be stored
 game_frame = LabelFrame(root, height=800, width=800, bg=bg_color)
@@ -37,6 +36,12 @@ options_frame = LabelFrame(game_frame, bg=bg_color)
 # will store used letters here
 used_letters = list()
 used_letters_label = Label(game_frame, bg=bg_color)
+
+
+# to reset user
+def reset_user():
+    global current_user
+    current_user = str()
 
 
 # create a list of images for the various stages of the game. 0 is starting image, 7 is the game over image.
@@ -52,7 +57,7 @@ create_graphics()
 
 # Creating the first page of the game
 def main_menu():
-    global game_frame, main_menu_image, menu_image, options_frame, difficulty
+    global game_frame, main_menu_image, menu_image, options_frame, difficulty, change_user, current_user
 
     # creating a function here to get the username of the player and display the second options window,
     # where difficulty will be chosen.
@@ -88,6 +93,10 @@ def main_menu():
                                activeforeground=afg_color)
         difficult_btn.grid(row=4, column=0)
 
+    # if change_user:
+    #     current_user = ""
+    #     change_user = False
+
     game_frame.destroy()
     game_frame = LabelFrame(root, height=800, width=800, bg=bg_color)
     game_frame.pack(fill=BOTH, expand=True)
@@ -115,6 +124,10 @@ def main_menu():
                               fg=fg_color, activebackground=abg_color,activeforeground=afg_color)
         get_user_btn.grid(row=0, column=2, padx=10)
         options_frame.pack(pady=20)
+
+
+game_menu = DisplayMenu(root, main_menu, reset_user)
+game_menu.display_menu()
 
 
 def start_game(diff: str):
@@ -199,6 +212,9 @@ def try_letter():
             winner_text.pack()
             choices_frame.destroy()
             graphic_label.configure(image=graphics[8])
+            # calculating the points won and adding them to the curr user text file
+            points = get_points(len(hidden_word), 0)
+            add_score(current_user, points)
             generate_buttons()
     else:
         current_index += 1
@@ -208,6 +224,9 @@ def try_letter():
                                fg=fg_color)
             loser_text.pack()
             choices_frame.destroy()
+            # calculating the points lost and adding them to curr user text file
+            points = get_points(len(hidden_word), hidden_word.count("_"))
+            add_score(current_user, points)
             generate_buttons()
             for index, letter in enumerate(current_word):
                 hidden_word[index] = letter
