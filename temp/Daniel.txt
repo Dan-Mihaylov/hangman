@@ -1,0 +1,10 @@
+points:10000,lose
+points:60,win
+points:-100,lose
+points:60,win
+points:-100,lose
+points:-40,lose
+points:-80,lose
+points:-40,lose
+points:-120,lose
+points:90,win

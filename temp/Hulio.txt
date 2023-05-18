@@ -1,0 +1,2 @@
+points:-60,lose
+points:60,win
